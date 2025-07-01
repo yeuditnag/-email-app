@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="he">
+  <head>
+    <meta charset="UTF-8" />
+    <title>שליחת מייל</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; direction: rtl; }
+      label { display: block; margin: 10px 0 5px; }
+    </style>
+  </head>
+  <body>
+    <h2>טופס שליחת מייל עם קובץ מצורף</h2>
+    <form id="mailForm">
+      <label>כתובת נמען:</label>
+      <input type="email" id="to" required />
+      
+      <label>נושא ההודעה:</label>
+      <input type="text" id="subject" required />
+
+      <label>גוף ההודעה:</label>
+      <textarea id="body" rows="5" cols="40"></textarea>
+
+      <button type="submit">שלח</button>
+    </form>
+
+    <script>
+      document.getElementById('mailForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const to = document.getElementById('to').value;
+        const subject = document.getElementById('subject').value;
+        const body = document.getElementById('body').value;
+        await window.api.sendMail({ to, subject, body });
+      });
+    </script>
+  </body>
+</html>
